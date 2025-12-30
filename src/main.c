@@ -6,7 +6,7 @@
 /*   By: gubusque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 20:47:00 by gubusque          #+#    #+#             */
-/*   Updated: 2025/12/21 21:37:07 by gubusque         ###   ########.fr       */
+/*   Updated: 2025/12/29 20:17:44 by gubusque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ void	init_img(t_game *d)
 	h = 50;
 	d->x = (d->width_l - 1) * 50;
 	d->y = (d->map_len / d->width_l + 1) * 50; 
-	d->bush = mlx_xpm_file_to_image(d->mlx, "img/bush.xpm", &w, &h);
-	d->fond = mlx_xpm_file_to_image(d->mlx, "img/fond.xpm", &w, &h);
-	d->poke = mlx_xpm_file_to_image(d->mlx, "img/poke.xpm", &w, &h);
-	d->npcstart = mlx_xpm_file_to_image(d->mlx, "img/npc.xpm", &w, &h);
-	d->npc = mlx_xpm_file_to_image(d->mlx, "img/npc.xpm", &w, &h);
-	d->npcmv = mlx_xpm_file_to_image(d->mlx, "img/npcmv.xpm", &w, &h);
-	d->npcleft = mlx_xpm_file_to_image(d->mlx, "img/npcleft.xpm", &w, &h);
-	d->npclmv = mlx_xpm_file_to_image(d->mlx, "img/npcleftmv.xpm", &w, &h);
-	d->npcright = mlx_xpm_file_to_image(d->mlx, "img/npcright.xpm", &w, &h);
-	d->npcrmv = mlx_xpm_file_to_image(d->mlx, "img/npcrightmv.xpm", &w, &h);
-	d->npcback = mlx_xpm_file_to_image(d->mlx, "img/npcback.xpm", &w, &h);
-	d->npcbmv = mlx_xpm_file_to_image(d->mlx, "img/npcbackmv.xpm", &w, &h);
-	d->imgexit = mlx_xpm_file_to_image(d->mlx, "img/imgexit.xpm", &w, &h);
+	d->bush = mlx_xpm_file_to_image(d->mlx, "textures/bush.xpm", &w, &h);
+	d->fond = mlx_xpm_file_to_image(d->mlx, "textures/fond.xpm", &w, &h);
+	d->poke = mlx_xpm_file_to_image(d->mlx, "textures/poke.xpm", &w, &h);
+	d->npcstart = mlx_xpm_file_to_image(d->mlx, "textures/npc.xpm", &w, &h);
+	d->npc = mlx_xpm_file_to_image(d->mlx, "textures/npc.xpm", &w, &h);
+	d->npcmv = mlx_xpm_file_to_image(d->mlx, "textures/npcmv.xpm", &w, &h);
+	d->npcleft = mlx_xpm_file_to_image(d->mlx, "textures/npcleft.xpm", &w, &h);
+	d->npclmv = mlx_xpm_file_to_image(d->mlx, "textures/npcleftmv.xpm", &w, &h);
+	d->npcright = mlx_xpm_file_to_image(d->mlx, "textures/npcright.xpm", &w, &h);
+	d->npcrmv = mlx_xpm_file_to_image(d->mlx, "textures/npcrightmv.xpm", &w, &h);
+	d->npcback = mlx_xpm_file_to_image(d->mlx, "textures/npcback.xpm", &w, &h);
+	d->npcbmv = mlx_xpm_file_to_image(d->mlx, "textures/npcbackmv.xpm", &w, &h);
+	d->imgexit = mlx_xpm_file_to_image(d->mlx, "textures/imgexit.xpm", &w, &h);
 }
 
 void	check_map_extension(t_game *d)
@@ -54,7 +54,7 @@ void	data_initer(t_game *d)
 	check_map_extension(d);
 	map_reader(d);
 	init_img(d);
-	d->win = mlx_new_window(d->mlx, d->x, d->y, "poxemon");
+	d->win = mlx_new_window(d->mlx, d->x, d->y, "so_long");
 	map_printer(d);
 }
 
