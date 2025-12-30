@@ -6,7 +6,7 @@
 #    By: gubusque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/20 00:20:30 by gubusque          #+#    #+#              #
-#    Updated: 2025/12/29 01:07:17 by gubusque         ###   ########.fr        #
+#    Updated: 2025/12/30 00:38:51 by gubusque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,12 +40,13 @@ OBJ	= $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 LIBFT	= $(LIBFT_DIR)libft.a
 LIBMLX	= $(LIBMLX_DIR)libmlx.a
 
-# Compilate && flags \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
+# Commands && flags \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
 
 CC	= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror 
 LDFLAGS	= -L$(LIBFT_DIR) -lft -L$(LIBMLX_DIR) -lmlx -lXext -lX11 -lm
 INCLUDE = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(LIBMLX_DIR)
+RM	= rm -rf
 
 # Rules \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
 
@@ -62,13 +63,13 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 libft: 
-	$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	$(MAKE) -C $(LIBFT_DIR) 
 
 libmlx:
-	$(MAKE) -C $(LIBMLX_DIR) --no-print-directory
+	$(MAKE) -C $(LIBMLX_DIR)
 
 clean:
-	$(RM) $(OBJ) $(LIBFT) $(LIBMLX)
+	$(RM) $(OBJ) $(OBJ_DIR) $(LIBFT) $(LIBMLX)
 	$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
 	$(MAKE) -C $(LIBMLX_DIR) clean --no-print-directory
 
