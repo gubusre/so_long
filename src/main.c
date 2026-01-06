@@ -6,7 +6,7 @@
 /*   By: gubusque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 20:47:00 by gubusque          #+#    #+#             */
-/*   Updated: 2026/01/07 00:06:38 by gubusque         ###   ########.fr       */
+/*   Updated: 2026/01/07 00:14:57 by gubusque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ void	init_img(t_game *d)
 	d->npcback = mlx_xpm_file_to_image(d->mlx, "textures/npcback.xpm", &w, &h);
 	d->npcbmv = mlx_xpm_file_to_image(d->mlx, "textures/npcbackmv.xpm", &w, &h);
 	d->imgexit = mlx_xpm_file_to_image(d->mlx, "textures/imgexit.xpm", &w, &h);
-	if (!d->bush || !d->fond || !d->poke || !d->npc || !d->npcmv || !d->npcleft
-		|| !d->npclmv || !d->npcright || !d->npcrmv || !d->npcback
-		|| !d->npcbmv || !d->npcstart || !d->imgexit)
-	{
-		if (d->npcstart)
-			mlx_destroy_image(d->mlx, d->npcstart);
-		ft_error(d, 12);
-	}
 }
 
 void	check_map_extension(t_game *d)
@@ -77,6 +69,14 @@ void	data_initer(t_game *d)
 	map_reader(d);
 	d->mlx = mlx_init();
 	init_img(d);
+	if (!d->bush || !d->fond || !d->poke || !d->npc || !d->npcmv || !d->npcleft
+		|| !d->npclmv || !d->npcright || !d->npcrmv || !d->npcback
+		|| !d->npcbmv || !d->npcstart || !d->imgexit)
+	{
+		if (d->npcstart)
+			mlx_destroy_image(d->mlx, d->npcstart);
+		ft_error(d, 12);
+	}
 	d->win = mlx_new_window(d->mlx, d->x, d->y, "so_long");
 	map_printer(d);
 	mlx_destroy_image(d->mlx, d->npcstart);
