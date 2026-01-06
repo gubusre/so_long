@@ -6,7 +6,7 @@
 /*   By: gubusque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:52:34 by gubusque          #+#    #+#             */
-/*   Updated: 2025/12/21 16:40:04 by gubusque         ###   ########.fr       */
+/*   Updated: 2026/01/02 03:02:04 by gubusque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,22 +88,13 @@ char	*ft_next(char *buffer)
 {
 	char	*remainder;
 	size_t	i;
-	size_t	j;
 
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (buffer[i] == '\0')
+	if (buffer[i + 1] == '\0')
 		return (free(buffer), NULL);
-	j = ft_strlen(buffer);
-	remainder = (char *)ft_calloc((j - i) + 1, sizeof(char));
-	if (!remainder)
-		return (free(buffer), NULL);
-	i++;
-	j = 0;
-	while (buffer[i])
-		remainder[j++] = buffer[i++];
-	remainder[j] = '\0';
+	remainder = ft_strdup(buffer + i + 1);
 	free(buffer);
 	return (remainder);
 }

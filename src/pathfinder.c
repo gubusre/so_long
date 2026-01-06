@@ -6,7 +6,7 @@
 /*   By: gubusque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 00:57:19 by gubusque          #+#    #+#             */
-/*   Updated: 2025/12/29 20:35:36 by gubusque         ###   ########.fr       */
+/*   Updated: 2026/01/06 20:14:35 by gubusque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,40 +22,70 @@ char	*duplicate_map(t_game *d)
 	return (copy);
 }
 
-void	path_finder(char *map, int width, int pos, int *collected, int *exit_reached)
+void	path_finder(t_path *p)
 {
-	if (map[pos] == '1' || map[pos] == 'V')
+	int	pos;
+
+	if (p->map[p->pos] == 'E')
+		p->exit = 1;
+	if (p->map[p->pos] == '1' || p->map[p->pos] == 'V' || p->map[p->pos] == 'E')
 		return ;
-	if (map[pos] == 'C')
-		(*collected)++;
-	if (map[pos] == 'E')
-		*exit_reached = 1;
-	map[pos] = 'V';
-	if (pos >= width && map[pos - width] != 'V')
-		path_finder(map, width, pos - width, collected, exit_reached);
-	if (map[pos + width] != '\0' && map[pos + width] != '\n' && map[pos + width] != 'V')
-		path_finder(map, width, pos + width, collected, exit_reached);
-	if (pos > 0 && map[pos - 1] != '\n' && map[pos - 1] != 'V')
-		path_finder(map, width, pos - 1, collected, exit_reached);
-	if (map[pos + 1] != '\n' && map[pos + 1] != 'V')
-		path_finder(map, width, pos + 1, collected, exit_reached);
+	if (p->map[p->pos] == 'C')
+		p->col++;
+	p->map[p->pos] = 'V';
+	pos = p->pos;
+	p->pos = pos - p->width;
+	if (pos >= p->width && p->map[pos - p->width] != 'V')
+		path_finder(p);
+	p->pos = pos + p->width;
+	if (p->map[pos + p->width] != '\0' && p->map[pos + p->width] != '\n'
+		&& p->map[pos + p->width] != 'V')
+		path_finder(p);
+	p->pos = pos - 1;
+	if (pos > 0 && p->map[pos - 1] != '\n' && p->map[pos - 1] != 'V')
+		path_finder(p);
+	p->pos = pos + 1;
+	if (p->map[pos + 1] != '\n' && p->map[pos + 1] != 'V')
+		path_finder(p);
+}
+
+int	position_finder(t_path *p)
+{
+	int	i;
+
+	i = 0;
+	while (p->map[i])
+	{
+		if (p->map[i] == 'P')
+			return (i);
+		i++;
+	}
+	return (0);
 }
 
 void	check_valid_path(t_game *d)
 {
-	char	*map_copy;
-	int	collected;
-	int	exit_reached;
+	t_path	*p;
+	int		out;
+	int		collected;
 
-	collected = 0;
-	exit_reached = 0;
-	map_copy = duplicate_map(d);
-	if (!map_copy)
+	p = ft_calloc(1, sizeof(t_path));
+	if (!p)
+		exit(0);
+	p->col = 0;
+	p->exit = 0;
+	p->width = d->width_l;
+	p->map = duplicate_map(d);
+	if (!p->map)
 		ft_error(d, 0);
-	path_finder(map_copy, d->width_l, d->player_pos, &collected, &exit_reached);
-	free(map_copy);
+	p->pos = position_finder(p);
+	path_finder(p);
+	collected = p->col;
+	out = p->exit;
+	free(p->map);
+	free(p);
 	if (collected != d->consum)
 		ft_error(d, 10);
-	if (!exit_reached)
+	if (!out)
 		ft_error(d, 11);
 }

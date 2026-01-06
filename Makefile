@@ -6,7 +6,7 @@
 #    By: gubusque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/20 00:20:30 by gubusque          #+#    #+#              #
-#    Updated: 2025/12/30 00:38:51 by gubusque         ###   ########.fr        #
+#    Updated: 2026/01/02 02:25:57 by gubusque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ SRC	= main.c	\
 	  map_reader.c	\
 	  map_printer.c	\
 	  key_press.c	\
-	  check_exit.c	\
 	  pathfinder.c	\
+	  ft_checkers.c	\
 	  ft_free.c	\
 	  ft_error.c	\
 		
@@ -43,7 +43,7 @@ LIBMLX	= $(LIBMLX_DIR)libmlx.a
 # Commands && flags \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
 
 CC	= cc
-CFLAGS	= -Wall -Wextra -Werror 
+CFLAGS	= -Wall -Wextra -Werror -g
 LDFLAGS	= -L$(LIBFT_DIR) -lft -L$(LIBMLX_DIR) -lmlx -lXext -lX11 -lm
 INCLUDE = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(LIBMLX_DIR)
 RM	= rm -rf
@@ -63,10 +63,10 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 libft: 
-	$(MAKE) -C $(LIBFT_DIR) 
+	$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
 libmlx:
-	$(MAKE) -C $(LIBMLX_DIR)
+	$(MAKE) -C $(LIBMLX_DIR) --no-print-directory
 
 clean:
 	$(RM) $(OBJ) $(OBJ_DIR) $(LIBFT) $(LIBMLX)

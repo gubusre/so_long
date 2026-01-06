@@ -6,7 +6,7 @@
 /*   By: gubusque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:35:37 by gubusque          #+#    #+#             */
-/*   Updated: 2025/12/21 16:22:48 by gubusque         ###   ########.fr       */
+/*   Updated: 2026/01/02 01:53:21 by gubusque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 # ifndef MAX_FD
@@ -29,5 +29,6 @@ char	*get_next_line(int fd);
 char	*read_file(int fd, char *res);
 char	*ft_line(char *buffer);
 char	*ft_next(char *buffer);
+void	clean_gnl(void);
 
 #endif
